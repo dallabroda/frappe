@@ -45,7 +45,7 @@ class TestScheduler(IntegrationTestCase):
 		enqueued_jobs = enqueue_events()
 
 		self.assertIn("frappe.desk.notifications.clear_notifications", enqueued_jobs)
-		self.assertIn("frappe.utils.change_log.check_for_update", enqueued_jobs)
+		self.assertIn("frappe.desk.form.document_follow.send_weekly_updates", enqueued_jobs)
 		self.assertIn(
 			"frappe.email.doctype.auto_email_report.auto_email_report.send_monthly",
 			enqueued_jobs,
