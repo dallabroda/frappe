@@ -244,7 +244,6 @@ scheduler_events = {
 			"frappe.deferred_insert.save_to_db",
 			"frappe.automation.doctype.reminder.reminder.send_reminders",
 			"frappe.model.utils.link_count.update_link_count",
-			"frappe.utils.telemetry.pulse.client.send_queued_events",
 		],
 		# 10 minutes
 		"0/10 * * * *": [
@@ -303,7 +302,6 @@ scheduler_events = {
 	],
 	"weekly_long": [
 		"frappe.desk.form.document_follow.send_weekly_updates",
-		"frappe.utils.change_log.check_for_update",
 	],
 	"monthly": [
 		"frappe.email.doctype.auto_email_report.auto_email_report.send_monthly",

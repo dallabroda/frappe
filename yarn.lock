@@ -473,9 +473,9 @@ acorn@^7.1.1:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.4.1.tgz#feaed255973d2e77555b83dbc08851a6c63520fa"
   integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
 
-"air-datepicker@git+https://github.com/frappe/air-datepicker":
+"air-datepicker@git+https://github.com/dallabroda/air-datepicker#76ea5927d268bffe65fbf58df4098537914b626d":
   version "2.2.3"
-  resolved "git+https://github.com/frappe/air-datepicker#ed37b94d95c68d8544357e330be0c89d044a3eea"
+  resolved "git+https://github.com/dallabroda/air-datepicker#76ea5927d268bffe65fbf58df4098537914b626d"
   dependencies:
     jquery ">=2.0.0 <4.0.0"
 

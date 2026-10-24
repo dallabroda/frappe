@@ -23,7 +23,7 @@ dependencies = [
     # do NOT add loose requirements on PyMySQL versions.
     "PyMySQL==1.1.2",
     "pypdf==6.19.0",
-    "PyPika @ git+https://github.com/frappe/pypika@7ef6e40215d46cd531e8c4e58650b84c11abbd04",
+    "PyPika @ git+https://github.com/dallabroda/pypika@741ac41443c8b9a8618b832130b821977b2fac53",
     "mysqlclient==2.2.7",
     "PyQRCode~=1.2.1",
     "PyYAML~=6.0.3",
@@ -41,7 +41,7 @@ dependencies = [
     "cssutils~=2.11.1",
     "distro~=1.9.0",
     "email-reply-parser~=0.5.12",
-    "gunicorn @ git+https://github.com/frappe/gunicorn@54b59ca884c79dcf04d4882658a32bbaf17e999f",
+    "gunicorn @ git+https://github.com/dallabroda/gunicorn@ebc25b7586bee83a917575414a59646af2ae12d3",
     "html5lib~=1.1",
     "ipython~=8.37.0",
     "ldap3~=2.9.1",
