@@ -1,6 +1,5 @@
-// Loads the one canonical pulse client from pulse's own CDN (not the host backend),
-// so it's independent of the backend's framework version. Degrades to null if the
-// asset can't be loaded, leaving telemetry off.
+// Pulse telemetry types. Cred Hub never loads the pulse client (see loadPulseClient),
+// so telemetry is always off.
 
 import { call } from "frappe-ui";
 
@@ -62,38 +61,11 @@ export async function fetchBootConfig(): Promise<BootConfig> {
   }
 }
 
-export const DEFAULT_PULSE_CLIENT_URL =
-  "https://pulse.m.frappe.cloud/assets/pulse/js/pulse_client.js";
-
-// Only import from a trusted origin: pulse's CDN or the ingest host (self-hosted
-// pulse). Stops a tampered boot_config from redirecting import() to an attacker
-// origin — an untrusted url falls back to the canonical CDN.
-function trustedClientUrl(
-  clientUrl: string | undefined,
-  host?: string,
-): string {
-  if (!clientUrl) return DEFAULT_PULSE_CLIENT_URL;
-  try {
-    const target = new URL(clientUrl);
-    if (target.protocol !== "https:") return DEFAULT_PULSE_CLIENT_URL;
-    const allowed = new Set([new URL(DEFAULT_PULSE_CLIENT_URL).origin]);
-    try {
-      if (host) allowed.add(new URL(host).origin);
-    } catch {}
-    if (allowed.has(target.origin)) return clientUrl;
-  } catch {}
-  return DEFAULT_PULSE_CLIENT_URL;
-}
-
 export async function loadPulseClient(
-  options: PulseClientOptions = {},
+  _options: PulseClientOptions = {},
 ): Promise<PulseClient | null> {
-  const { clientUrl, ...clientOptions } = options;
-  try {
-    const url = trustedClientUrl(clientUrl, clientOptions.host);
-    const mod = await import(/* @vite-ignore */ url);
-    return new mod.PulseClient(clientOptions) as PulseClient;
-  } catch (error) {
-    return null;
-  }
+  // Cred Hub: the pulse client used to be imported at runtime from Frappe's CDN
+  // (pulse.m.frappe.cloud) even with telemetry off. No code is loaded from outside
+  // the server, so telemetry stays off.
+  return null;
 }

@@ -4,7 +4,8 @@ from datetime import UTC, datetime
 
 import frappe
 
-DEFAULT_PULSE_HOST = "https://pulse.m.frappe.cloud"
+# Cred Hub: no default host; events only go to a host set explicitly in site config
+DEFAULT_PULSE_HOST = ""
 
 
 def pulse_host() -> str:
