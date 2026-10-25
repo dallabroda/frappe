@@ -115,6 +115,11 @@
 				{{ _("Don't have an account?") }}
 				<a href="#signup" class="text-p-sm-semibold text-ink-gray-6">{{ _("Sign up") }}</a>
 			</div>
+			{%- elif signup_url -%}
+			<div class="text-center sign-up-message text-p-sm text-ink-gray-6 mt-auto mb-0">
+				{{ _("Don't have an account?") }}
+				<a href="{{ signup_url }}" class="text-p-sm-semibold text-ink-gray-6">{{ _("Create my company") }}</a>
+			</div>
 			{%- endif -%}
 		</div>
 	</section>
@@ -130,6 +135,11 @@
 			<div class="text-center sign-up-message text-p-sm text-ink-gray-6 mt-auto mb-0">
 				{{ _("Don't have an account?") }}
 				<a href="#signup" class="text-p-sm-semibold text-ink-gray-6">{{ _("Sign up") }}</a>
+			</div>
+			{%- elif signup_url -%}
+			<div class="text-center sign-up-message text-p-sm text-ink-gray-6 mt-auto mb-0">
+				{{ _("Don't have an account?") }}
+				<a href="{{ signup_url }}" class="text-p-sm-semibold text-ink-gray-6">{{ _("Create my company") }}</a>
 			</div>
 			{%- endif -%}
 		</div>
@@ -207,6 +217,11 @@
 			<div class="text-center sign-up-message text-p-sm text-ink-gray-6 mt-auto mb-0">
 				{{ _("Don't have an account?") }}
 				<a href="#signup" class="text-p-sm-semibold text-ink-gray-6">{{ _("Sign up") }}</a>
+			</div>
+			{%- elif signup_url -%}
+			<div class="text-center sign-up-message text-p-sm text-ink-gray-6 mt-auto mb-0">
+				{{ _("Don't have an account?") }}
+				<a href="{{ signup_url }}" class="text-p-sm-semibold text-ink-gray-6">{{ _("Create my company") }}</a>
 			</div>
 			{%- endif -%}
 		</div>

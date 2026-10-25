@@ -44231,3 +44231,15 @@ msgstr "{} não encontrado no PATH! Isto é necessário para fazer um backup."
 msgid "← Back to upload files"
 msgstr "← Voltar para carregar arquivos"
 
+
+#: frappe/utils/oauth.py
+msgid "No account found"
+msgstr "Conta não encontrada"
+
+#: frappe/utils/oauth.py
+msgid "There is no account with {0}. Ask an administrator to invite you."
+msgstr "Não há conta com {0}. Peça um convite ao administrador."
+
+#: frappe/www/login.html
+msgid "Create my company"
+msgstr "Criar minha empresa"
