@@ -1232,7 +1232,7 @@ msgstr "Aproximadamente {0} segundos restantes"
 
 #: frappe/templates/emails/user_invitation.html:6
 msgid "Accept Invitation"
-msgstr ""
+msgstr "Aceitar convite"
 
 #. Description of the 'Allow Unregistered Events' (Check) field in DocType
 #. 'Automation Settings'
@@ -4426,7 +4426,7 @@ msgstr "Voltar à Página Inicial"
 
 #: frappe/www/login.html:175 frappe/www/update-password.html:76
 msgid "Back to sign in"
-msgstr ""
+msgstr "Voltar para o login"
 
 #: frappe/public/js/print_format_builder/print_format_builder.bundle.js:120
 msgid "Back to the editor"
@@ -6164,11 +6164,11 @@ msgstr ""
 
 #: frappe/templates/emails/login_with_email_link.html:3
 msgid "Click below to login."
-msgstr ""
+msgstr "Clique abaixo para entrar."
 
 #: frappe/templates/emails/password_reset.html:3
 msgid "Click below to reset your password."
-msgstr ""
+msgstr "Clique abaixo para redefinir sua senha."
 
 #: frappe/website/doctype/web_form/templates/web_form.html:167
 msgid "Click here"
@@ -6843,7 +6843,7 @@ msgstr "Concluir configuração"
 
 #: frappe/templates/emails/new_user.html:7
 msgid "Complete registration"
-msgstr ""
+msgstr "Concluir cadastro"
 
 #: frappe/public/js/data_import_wizard.bundle.js:1190
 msgid "Complete the earlier steps before continuing."
@@ -7686,7 +7686,7 @@ msgstr "Criar e continuar"
 #: frappe/templates/includes/login/login.js:107
 #: frappe/templates/includes/login/login.js:160 frappe/templates/signup.html:21
 msgid "Create Account"
-msgstr ""
+msgstr "Criar conta"
 
 #: frappe/public/js/frappe/ui/address_autocomplete/autocomplete_dialog.js:49
 msgid "Create Address"
@@ -9744,7 +9744,7 @@ msgstr "Não removido"
 
 #: frappe/www/login.html:198
 msgid "Didn't receive the link?"
-msgstr ""
+msgstr "Não recebeu o link?"
 
 #: frappe/public/js/frappe/utils/diffview.js:57
 msgid "Diff"
@@ -11880,7 +11880,7 @@ msgstr "O e-mail é obrigatório para criar e-mail de usuário"
 
 #: frappe/templates/includes/login/login.js:24
 msgid "Email is required."
-msgstr ""
+msgstr "Informe o e-mail."
 
 #. Label of the email_notification_types (Table MultiSelect) field in DocType
 #. 'Notification Settings'
@@ -12428,7 +12428,7 @@ msgstr "Insira o nome do campo de moeda ou um valor em cache (ex.: Company:compa
 
 #: frappe/templates/emails/verification_code.html:3
 msgid "Enter this code to complete your login."
-msgstr ""
+msgstr "Digite este código para concluir o login."
 
 #. Description of the 'Message Parameter' (Data) field in DocType 'SMS
 #. Settings'
@@ -14597,7 +14597,7 @@ msgstr "Esqueceu a senha?"
 
 #: frappe/www/login.html:37
 msgid "Forgot password?"
-msgstr ""
+msgstr "Esqueceu a senha?"
 
 #. Label of the form_builder_tab (Tab Break) field in DocType 'DocType'
 #. Option for the 'Apply To' (Select) field in DocType 'Client Script'
@@ -14882,7 +14882,7 @@ msgstr "Largura total"
 
 #: frappe/templates/includes/login/login.js:53
 msgid "Full name is required."
-msgstr ""
+msgstr "Informe o nome completo."
 
 #: frappe/public/js/frappe/views/communication.js:91
 msgid "Full screen"
@@ -15252,7 +15252,7 @@ msgstr ""
 
 #: frappe/www/update-password.html:232
 msgid "Good"
-msgstr ""
+msgstr "Boa"
 
 #: frappe/public/js/frappe/widgets/onboarding_widget.js:60
 msgid "Good afternoon"
@@ -15928,7 +15928,7 @@ msgstr "Olá {0}"
 #: frappe/templates/emails/new_user.html:4
 #, python-brace-format
 msgid "Hi {0}, an account has been created for you at {1}. Before you can log in, you'll need to set your password."
-msgstr ""
+msgstr "Olá, {0}! Criamos uma conta para você em {1}. Antes de entrar, defina sua senha."
 
 #: frappe/desk/page/setup_wizard/setup_wizard.js:530
 #, python-brace-format
@@ -16380,7 +16380,7 @@ msgstr "Endereço IP"
 
 #: frappe/templates/emails/administrator_logged_in.html:4
 msgid "IP address:"
-msgstr ""
+msgstr "Endereço IP:"
 
 #. Option for the 'Type' (Select) field in DocType 'DocField'
 #. Label of the icon (Icon) field in DocType 'DocType'
@@ -16662,11 +16662,11 @@ msgstr "Se este e-mail está registrado conosco, enviamos instruções de redefi
 
 #: frappe/templates/emails/administrator_logged_in.html:5
 msgid "If this was you:"
-msgstr ""
+msgstr "Se foi você:"
 
 #: frappe/templates/emails/administrator_logged_in.html:6
 msgid "If this wasn't you:"
-msgstr ""
+msgstr "Se não foi você:"
 
 #. Description of the 'Fetch on Save if Empty' (Check) field in DocType
 #. 'DocField'
@@ -16701,15 +16701,15 @@ msgstr "Se estiver enviando novos registros, deixe a coluna \"name\" (ID) em bra
 
 #: frappe/templates/emails/verification_code.html:5
 msgid "If you didn't request this code, you can safely ignore this email."
-msgstr ""
+msgstr "Se você não pediu este código, pode ignorar este e-mail."
 
 #: frappe/templates/emails/login_with_email_link.html:11
 msgid "If you didn't request this, you can safely ignore this email. Your account is safe."
-msgstr ""
+msgstr "Se você não pediu isto, pode ignorar este e-mail. Sua conta está segura."
 
 #: frappe/templates/emails/password_reset.html:11
 msgid "If you didn't request this, you can safely ignore this email. Your password won't be changed."
-msgstr ""
+msgstr "Se você não pediu isto, pode ignorar este e-mail. Sua senha não será alterada."
 
 #: frappe/utils/password.py:214
 msgid "If you have recently restored the site, you may need to copy the site_config.json containing the original encryption key."
@@ -16722,11 +16722,11 @@ msgstr "Se você definir isso, este item aparecerá em um menu suspenso sob o it
 
 #: frappe/templates/emails/new_user.html:13
 msgid "If you weren't expecting this account, you can safely ignore this email."
-msgstr ""
+msgstr "Se você não esperava esta conta, pode ignorar este e-mail."
 
 #: frappe/templates/emails/user_invitation.html:4
 msgid "If you weren't expecting this, you can safely ignore this email."
-msgstr ""
+msgstr "Se você não esperava este convite, pode ignorar este e-mail."
 
 #. Description of the 'Delimiter Options' (Data) field in DocType 'Data Import'
 #: frappe/core/doctype/data_import/data_import.json:225
@@ -17983,7 +17983,7 @@ msgstr "Tipo de condição inválido em filtros aninhados: {0}"
 
 #: frappe/templates/includes/login/login.js:380
 msgid "Invalid credentials, try again."
-msgstr ""
+msgstr "E-mail ou senha incorretos. Tente de novo."
 
 #: frappe/automation/doctype/automation_flow/automation_flow.py:234
 #, python-brace-format
@@ -18527,12 +18527,12 @@ msgstr "Incidentes"
 
 #: frappe/templates/emails/verification_code.html:3
 msgid "It expires in 1 minute."
-msgstr ""
+msgstr "Ele vence em 1 minuto."
 
 #: frappe/templates/emails/verification_code.html:3
 #, python-brace-format
 msgid "It expires in {0} minutes."
-msgstr ""
+msgstr "Ele vence em {0} minutos."
 
 #: frappe/core/doctype/file/utils.py:166 frappe/utils/file_manager.py:316
 #, python-brace-format
@@ -19600,7 +19600,7 @@ msgstr ""
 
 #: frappe/www/login.html:140
 msgid "Let's setup your account."
-msgstr ""
+msgstr "Vamos configurar sua conta."
 
 #. Option for the 'PDF Page Size' (Select) field in DocType 'Print Settings'
 #: frappe/printing/doctype/print_settings/print_settings.json:65
@@ -20383,7 +20383,7 @@ msgstr "Expiração do link de login por e-mail (em minutos)"
 
 #: frappe/www/login.html:203
 msgid "Login with password"
-msgstr ""
+msgstr "Entrar com senha"
 
 #: frappe/auth.py:150
 msgid "Login with username and password is not allowed."
@@ -21275,7 +21275,7 @@ msgstr "Mínimo"
 
 #: frappe/www/update-password.html:53
 msgid "Minimum 8 characters, including at least one number or special character."
-msgstr ""
+msgstr "Mínimo de 8 caracteres, com pelo menos um número ou caractere especial."
 
 #. Label of the minimum_password_score (Select) field in DocType 'System
 #. Settings'
@@ -22281,7 +22281,7 @@ msgstr "Lista de strings separadas por nova linha representando formas de contat
 
 #: frappe/templates/emails/administrator_logged_in.html:1
 msgid "New login to the Administrator account"
-msgstr ""
+msgstr "Novo acesso à conta Administrator"
 
 #: frappe/www/update-password.html:111
 msgid "New password cannot be same as old password"
@@ -22716,7 +22716,7 @@ msgstr ""
 #: frappe/www/login.py:177
 #, python-brace-format
 msgid "No active user found with email address {0}"
-msgstr ""
+msgstr "Nenhum usuário ativo com o e-mail {0}"
 
 #: frappe/public/js/frappe/form/templates/address_list.html:28
 msgid "No addresses added yet"
@@ -24669,7 +24669,7 @@ msgstr "As opções não estão definidas para o campo Link {0}"
 #: frappe/templates/emails/password_reset.html:8
 #: frappe/templates/emails/user_invitation.html:9
 msgid "Or copy and paste:"
-msgstr ""
+msgstr "Ou copie e cole:"
 
 #: frappe/core/doctype/data_import/data_import.js:259
 msgid "Or skip rows instead"
@@ -25974,7 +25974,7 @@ msgstr "Por favor, verifique suas credenciais de login de e-mail."
 
 #: frappe/www/login.html:185
 msgid "Please check your email."
-msgstr ""
+msgstr "Confira seu e-mail."
 
 #: frappe/twofactor.py:241
 msgid "Please check your registered email address for instructions on how to proceed. Do not close this window as you will have to return to it."
@@ -26084,7 +26084,7 @@ msgstr "Por favor, insira um endereço de e-mail válido."
 
 #: frappe/templates/includes/login/login.js:49
 msgid "Please enter a valid email."
-msgstr ""
+msgstr "Informe um e-mail válido."
 
 #: frappe/templates/includes/contact.js:15
 msgid "Please enter both your email and message so that we can get back to you. Thanks!"
@@ -26102,7 +26102,7 @@ msgstr "Por favor, insira números de celular válidos"
 
 #: frappe/www/login.html:155
 msgid "Please enter your email, we'll send you password reset link"
-msgstr ""
+msgstr "Informe seu e-mail e enviaremos um link para redefinir a senha"
 
 #: frappe/www/update-password.html:148
 msgid "Please enter your new password."
@@ -26407,7 +26407,7 @@ msgstr "Porta"
 
 #: frappe/www/me.html:81
 msgid "Portal"
-msgstr ""
+msgstr "Portal"
 
 #. Label of the menu (Table) field in DocType 'Portal Settings'
 #: frappe/website/doctype/portal_settings/portal_settings.json:37
@@ -29063,7 +29063,7 @@ msgstr ""
 #: frappe/core/doctype/user_invitation/user_invitation.js:17
 #: frappe/www/login.html:198
 msgid "Resend"
-msgstr ""
+msgstr "Reenviar"
 
 #: frappe/desk/doctype/form_tour/form_tour.js:101
 #: frappe/desk/doctype/global_search_settings/global_search_settings.js:100
@@ -29152,7 +29152,7 @@ msgstr ""
 
 #: frappe/templates/includes/login/login.js:329
 msgid "Reset link emailed"
-msgstr ""
+msgstr "Link de redefinição enviado por e-mail"
 
 #: frappe/public/js/frappe/data_import/import_tree_preview.js:518
 msgid "Reset node"
@@ -29160,7 +29160,7 @@ msgstr ""
 
 #: frappe/templates/emails/password_reset.html:5
 msgid "Reset password"
-msgstr ""
+msgstr "Redefinir senha"
 
 #: frappe/public/js/frappe/utils/datatable.js:8
 msgid "Reset sorting"
@@ -31343,7 +31343,7 @@ msgstr "Enviar e-mail ao criador"
 #: frappe/templates/includes/login/login.js:74
 #: frappe/templates/includes/login/login.js:159 frappe/www/login.html:171
 msgid "Send Link"
-msgstr ""
+msgstr "Enviar link"
 
 #. Label of the send_me_a_copy (Check) field in DocType 'User'
 #: frappe/core/doctype/user/user.json:420
@@ -32021,7 +32021,7 @@ msgstr ""
 
 #: frappe/templates/emails/two_factor_setup.html:2
 msgid "Set up your authenticator app"
-msgstr ""
+msgstr "Configure seu aplicativo autenticador"
 
 #: frappe/automation_engine/actions/core.py:79
 #, python-brace-format
@@ -32860,7 +32860,7 @@ msgstr ""
 #: frappe/www/login.html:87 frappe/www/login.html:109 frappe/www/login.html:125
 #: frappe/www/login.html:182
 msgid "Sign In"
-msgstr ""
+msgstr "Entrar"
 
 #. Label of the sign_out (Button) field in DocType 'User Session Display'
 #: frappe/core/doctype/user_session_display/user_session_display.json:47
@@ -32869,7 +32869,7 @@ msgstr "Sair"
 
 #: frappe/www/login.html:140
 msgid "Sign Up"
-msgstr ""
+msgstr "Criar conta"
 
 #. Label of the sign_up_and_confirmation_section (Section Break) field in
 #. DocType 'Email Group'
@@ -32954,7 +32954,7 @@ msgstr "Tipos únicos possuem apenas um registro sem tabelas associadas. Os valo
 #: frappe/desk/doctype/custom_sidebar/custom_sidebar_list.js:11
 #: frappe/templates/emails/security_txt_expiry_alert.html:5
 msgid "Site"
-msgstr ""
+msgstr "Site"
 
 #: frappe/database/database.py:286
 msgid "Site is running in read only mode for maintenance or site update, this action can not be performed right now. Please try again later."
@@ -33884,7 +33884,7 @@ msgstr "Status atualizado. O e-mail será processado na próxima execução agen
 #: frappe/www/message.html:24
 #, python-brace-format
 msgid "Status: {0}"
-msgstr ""
+msgstr "Situação: {0}"
 
 #. Label of the step_idx (Int) field in DocType 'Automation Run Step'
 #. Label of the step (Link) field in DocType 'Onboarding Step Map'
@@ -34028,7 +34028,7 @@ msgstr "Linhas retas de teclas são fáceis de adivinhar"
 
 #: frappe/www/update-password.html:42
 msgid "Strength:"
-msgstr ""
+msgstr "Força:"
 
 #: frappe/public/js/frappe/form/controls/text_editor.js:313
 msgid "Strikethrough"
@@ -35248,7 +35248,7 @@ msgstr "O <strong>Status do documento</strong> para todos os estados foi redefin
 
 #: frappe/templates/emails/administrator_logged_in.html:6
 msgid "The Administrator account may be compromised. Change the Administrator password immediately."
-msgstr ""
+msgstr "A conta Administrator pode ter sido comprometida. Troque a senha dela imediatamente."
 
 #: frappe/templates/emails/auto_repeat_fail.html:3
 msgid "The Auto Repeat for this document has been disabled."
@@ -35535,13 +35535,13 @@ msgstr ""
 #: frappe/templates/emails/login_with_email_link.html:3
 #: frappe/templates/emails/password_reset.html:3
 msgid "The link expires in 1 minute."
-msgstr ""
+msgstr "O link vence em 1 minuto."
 
 #: frappe/templates/emails/login_with_email_link.html:3
 #: frappe/templates/emails/password_reset.html:3
 #, python-brace-format
 msgid "The link expires in {0} minutes."
-msgstr ""
+msgstr "O link vence em {0} minutos."
 
 #: frappe/www/login.py:200
 msgid "The link you trying to login is invalid or expired."
@@ -35825,7 +35825,7 @@ msgstr "Não existe nenhuma tarefa chamada \"{}\""
 
 #: frappe/templates/emails/administrator_logged_in.html:5
 msgid "There is nothing else you need to do."
-msgstr ""
+msgstr "Você não precisa fazer mais nada."
 
 #: frappe/desk/doctype/dock/dock.py:410
 #, python-brace-format
@@ -36157,16 +36157,16 @@ msgstr ""
 
 #: frappe/templates/emails/user_invitation.html:4
 msgid "This invitation expires in 1 day."
-msgstr ""
+msgstr "Este convite vence em 1 dia."
 
 #: frappe/templates/emails/user_invitation.html:4
 #, python-brace-format
 msgid "This invitation expires in {0} days."
-msgstr ""
+msgstr "Este convite vence em {0} dias."
 
 #: frappe/templates/emails/user_invitation_expired.html:1
 msgid "This invitation has expired"
-msgstr ""
+msgstr "Este convite venceu"
 
 #: frappe/public/js/frappe/views/reports/query_report.js:2468
 msgid "This is a background report. Please set the appropriate filters and then generate a new one."
@@ -36922,7 +36922,7 @@ msgstr ""
 
 #: frappe/templates/includes/login/login.js:382
 msgid "Too many requests. Please try again later."
-msgstr ""
+msgstr "Muitas tentativas. Tente de novo mais tarde."
 
 #: frappe/core/doctype/user/user.py:1210
 msgid "Too many users signed up recently, so the registration is disabled. Please try back in an hour"
@@ -38361,7 +38361,7 @@ msgstr "O uso de subconsulta ou função é restrito"
 
 #: frappe/www/update-password.html:21
 msgid "Use strong passwords."
-msgstr ""
+msgstr "Use senhas fortes."
 
 #: frappe/public/js/frappe/views/communication.js:492
 msgid "Use template"
@@ -39953,7 +39953,7 @@ msgstr "Bem-vindo a {0}"
 #: frappe/www/login.html:109 frappe/www/login.html:125
 #: frappe/www/login.html:182
 msgid "Welcome! Please sign in to continue."
-msgstr ""
+msgstr "Boas-vindas! Entre para continuar."
 
 #: frappe/public/js/frappe/ui/sidebar/dock_manager.js:377
 msgid "What it opens"
@@ -41348,7 +41348,7 @@ msgstr ""
 #: frappe/templates/emails/user_invitation.html:1
 #, python-brace-format
 msgid "You're invited to join {0}"
-msgstr ""
+msgstr "Você foi convidado para o {0}"
 
 #: frappe/core/doctype/user_invitation/user_invitation.py:116
 #, python-brace-format
@@ -41434,21 +41434,21 @@ msgstr ""
 
 #: frappe/templates/emails/user_invitation_cancelled.html:1
 msgid "Your invitation has been cancelled"
-msgstr ""
+msgstr "Seu convite foi cancelado"
 
 #: frappe/templates/emails/user_invitation_expired.html:3
 #, python-brace-format
 msgid "Your invitation to join {0} is no longer valid. Ask your team to send a new invitation if you'd still like to join."
-msgstr ""
+msgstr "Seu convite para o {0} não vale mais. Se ainda quiser participar, peça um novo convite à sua equipe."
 
 #: frappe/templates/emails/user_invitation_cancelled.html:3
 #, python-brace-format
 msgid "Your invitation to join {0} was cancelled by the site administrator. If this was a mistake, reach out to your team to request a new invitation."
-msgstr ""
+msgstr "Seu convite para o {0} foi cancelado pelo administrador. Se foi engano, peça um novo convite à sua equipe."
 
 #: frappe/templates/emails/new_user.html:5
 msgid "Your login ID is:"
-msgstr ""
+msgstr "Seu login é:"
 
 #: frappe/utils/oauth.py:232
 msgid "Your login attempt is invalid or has expired. Please try again."
@@ -41474,7 +41474,7 @@ msgstr "Sua senha foi alterada e você pode ter sido desconectado de todos os si
 
 #: frappe/www/update-password.html:119
 msgid "Your password has expired. Please set a new password."
-msgstr ""
+msgstr "Sua senha venceu. Defina uma nova senha."
 
 #: frappe/core/doctype/user/user.py:414
 #, python-brace-format
@@ -41500,7 +41500,7 @@ msgstr "Sua sessão expirou, por favor entre novamente para continuar."
 
 #: frappe/templates/emails/verification_code.html:1
 msgid "Your verification code"
-msgstr ""
+msgstr "Seu código de verificação"
 
 #: frappe/utils/data.py:1577
 msgid "Zero"
@@ -41943,7 +41943,7 @@ msgstr ""
 #: frappe/templates/signup.html:15 frappe/www/login.html:16
 #: frappe/www/login.html:164 frappe/www/login.html:191
 msgid "jane@example.com"
-msgstr ""
+msgstr "nome@empresa.com.br"
 
 #: frappe/public/js/frappe/utils/pretty_date.js:48
 msgid "just now"
@@ -42969,7 +42969,7 @@ msgstr "{0} tem notação de crase inválida: {1}"
 #: frappe/templates/emails/user_invitation.html:3
 #, python-brace-format
 msgid "{0} has invited you to join {1}."
-msgstr ""
+msgstr "{0} convidou você para o {1}."
 
 #: frappe/email/queue.py:124
 #, python-brace-format
