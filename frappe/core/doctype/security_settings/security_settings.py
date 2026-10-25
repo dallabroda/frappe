@@ -17,6 +17,9 @@ from frappe.utils import (
 )
 
 
+# Cred Hub: security reports go to CredTech (owner decision, 2026-10-25), never to Frappe
+DEFAULT_SECURITY_CONTACT = "mailto:eduardo_dallabrida@credtechdigital.com.br"
+
 class SecuritySettings(Document):
 	# begin: auto-generated types
 	# This code is auto-generated. Do not modify anything in this block.
@@ -42,32 +45,36 @@ class SecuritySettings(Document):
 	def security_txt(self):
 		return (
 			"\n\n".join(
-				[
+				section
+				for section in (
 					self.public_policy_section,
 					self.public_contacts_section,
 					self.public_languages_section,
 					self.public_expires_section,
-				]
+				)
+				if section
 			)
 			+ "\n"
 		)
 
 	@property
 	def public_policy_section(self):
-		value = self.public_policy or "https://frappe.io/security"
-		return f"# Read our security policy before reporting an issue\nPolicy: {value}"
+		# Cred Hub: no default policy (it pointed to Frappe's); the line is optional in RFC 9116
+		if not self.public_policy:
+			return ""
+		return f"# Read our security policy before reporting an issue\nPolicy: {self.public_policy}"
 
 	@property
 	def public_contacts_section(self):
 		contacts = [self.with_protocol(c.contact, c.type) for c in self.public_contacts] or [
-			"https://security.frappe.io"
+			DEFAULT_SECURITY_CONTACT
 		]
 		value = "\n".join(f"Contact: {c}" for c in contacts)
 		return f"# Our security address\n{value}"
 
 	@property
 	def public_languages_section(self):
-		langs = [l.language for l in self.public_languages] or ["en"]
+		langs = [l.language for l in self.public_languages] or ["pt", "en"]
 		value = ", ".join(langs)
 		return f"# We prefer talking in\nPreferred-Languages: {value}"
 

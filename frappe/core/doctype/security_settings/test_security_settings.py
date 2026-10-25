@@ -15,8 +15,8 @@ class TestSecuritySettings(IntegrationTestCase):
 				"public_policy": None,
 			}
 		)
-		section = doc.public_policy_section
-		self.assertIn("Policy: https://frappe.io/security", section)
+		self.assertEqual(doc.public_policy_section, "")
+		self.assertNotIn("Policy:", doc.security_txt)
 
 	def test_public_policy_section_custom(self):
 		doc = frappe.get_doc(
@@ -31,7 +31,7 @@ class TestSecuritySettings(IntegrationTestCase):
 	def test_public_languages_section_default(self):
 		doc = frappe.get_doc({"doctype": "Security Settings"})
 		section = doc.public_languages_section
-		self.assertIn("Preferred-Languages: en", section)
+		self.assertIn("Preferred-Languages: pt, en", section)
 
 	def test_public_languages_section_custom(self):
 		doc = frappe.get_doc(
@@ -49,7 +49,8 @@ class TestSecuritySettings(IntegrationTestCase):
 	def test_public_contacts_section_default(self):
 		doc = frappe.get_doc({"doctype": "Security Settings"})
 		section = doc.public_contacts_section
-		self.assertIn("https://security.frappe.io", section)
+		self.assertIn("Contact: mailto:eduardo_dallabrida@credtechdigital.com.br", section)
+		self.assertNotIn("frappe", section)
 
 	def test_public_contacts_section_email(self):
 		doc = frappe.get_doc(
