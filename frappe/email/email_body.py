@@ -711,4 +711,4 @@ def get_brand_logo(email_account):
 
 
 def get_brand_name():
-	return frappe.get_website_settings("app_name") or frappe.get_system_settings("app_name")
+	return frappe.get_website_settings("app_name") or frappe.get_system_settings("app_name") or "Cred Hub"
