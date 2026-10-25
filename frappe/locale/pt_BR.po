@@ -8805,7 +8805,7 @@ msgstr ""
 #: frappe/public/js/frappe/form/controls/date.js:260
 #, python-brace-format
 msgid "Date {0} must be in format: {1}"
-msgstr "{0}: O tipo de campo {1} para {2} não pode ser indexado"
+msgstr "A data {0} deve estar no formato: {1}"
 
 #: frappe/utils/password_strength.py:129
 msgid "Dates are often easy to guess."
@@ -23397,7 +23397,7 @@ msgstr "Não ativo"
 #: frappe/permissions.py:410
 #, python-brace-format
 msgid "Not allowed for {0}: {1}"
-msgstr "{0}: O tipo de campo {1} para {2} não pode ser indexado"
+msgstr "Não permitido para {0}: {1}"
 
 #: frappe/email/doctype/notification/notification.py:735
 #, python-brace-format
