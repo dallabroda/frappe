@@ -285,7 +285,7 @@
    "label": "Allow Login using User Name"
   },
   {
-   "default": "1",
+   "default": "0",
    "fieldname": "allow_error_traceback",
    "fieldtype": "Check",
    "label": "Show Full Error and Allow Reporting of Issues to the Developer"
