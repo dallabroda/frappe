@@ -42,7 +42,6 @@ def get_context(context):
 
 	context.no_header = True
 	context.for_test = "login.html"
-	context["title"] = _("Login")
 	context["hide_login"] = True  # dont show login link on login page again.
 	context["provider_logins"] = []
 	context["disable_signup"] = cint(frappe.get_website_settings("disable_signup"))
@@ -52,6 +51,8 @@ def get_context(context):
 	context["app_name"] = (
 		frappe.get_website_settings("app_name") or frappe.get_system_settings("app_name") or "Cred Hub"
 	)
+	# Aba do navegador: "Entrar · Cred Hub" (só "Entrar" não diz de qual sistema é)
+	context["title"] = f"{_('Login')} · {context['app_name']}"
 
 	signup_form_template = frappe.get_hooks("signup_form_template")
 	if signup_form_template and len(signup_form_template):
