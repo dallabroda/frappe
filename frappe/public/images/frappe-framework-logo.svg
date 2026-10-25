@@ -1,4 +1,14 @@
-<svg fill="none" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
-<path d="M35.7143 0H14.2857C6.39593 0 0 6.39593 0 14.2857V35.7143C0 43.6041 6.39593 50 14.2857 50H35.7143C43.6041 50 50 43.6041 50 35.7143V14.2857C50 6.39593 43.6041 0 35.7143 0Z" fill="#7B808A"></path>
-<path d="M25 10.7141L12.625 17.8569V19.9284L16.1964 21.9819L23.2143 26.0176V34.1249L16.1964 30.0712V26.6248L12.625 24.5177V32.1249L25 39.2677L37.375 32.1249V17.8391L25 10.6963V10.7141ZM17.9821 18.8927L25 14.8391L32.0178 18.8927L25 22.9463L17.9821 18.8927ZM33.8035 30.0891L26.7857 34.1427V26.0355L33.8035 21.9819V30.0891Z" fill="white"></path>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Cred Hub: marca "C" da CredTech (mesma geometria de scripts/credhub_brand_assets.py) -->
+  <defs>
+    <mask id="credhub-c-mask">
+      <rect width="512" height="512" fill="black"/>
+      <g transform="translate(12.8 12.8) scale(0.95)">
+        <path fill="white" fill-rule="evenodd" d="M66 256a147 147 0 1 0 294 0a147 147 0 1 0 -294 0Z M149 256a147 147 0 1 0 294 0a147 147 0 1 0 -294 0Z"/>
+        <rect x="345" y="208" width="167" height="90" fill="black"/>
+      </g>
+    </mask>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#111111"/>
+  <rect width="512" height="512" fill="#ffffff" mask="url(#credhub-c-mask)"/>
 </svg>
