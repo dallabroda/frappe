@@ -65,6 +65,11 @@ def get_context(context):
 	if path:
 		context["signup_form_template"] = frappe.get_template(path).render()
 
+	# Com o cadastro do site desligado, um app pode oferecer a própria página de cadastro (hook "login_signup_url")
+	for method in frappe.get_hooks("login_signup_url"):
+		if signup_url := frappe.get_attr(method)():
+			context["signup_url"] = signup_url
+
 	providers = frappe.get_all(
 		"Social Login Key",
 		filters={"enable_social_login": 1},

@@ -249,12 +249,7 @@ def login_oauth_user(
 			return
 
 	except SignupDisabledError:
-		return frappe.respond_as_web_page(
-			"Signup is Disabled",
-			"Sorry. Signup from Website is disabled.",
-			success=False,
-			http_status_code=403,
-		)
+		return respond_without_account(user, data)
 
 	frappe.local.login_manager.login_as(user)
 
@@ -360,6 +355,28 @@ def get_last_name(data: dict) -> str:
 
 def get_email(data: dict) -> str:
 	return data.get("email") or data.get("upn") or data.get("unique_name")
+
+
+def respond_without_account(email: str, data: dict):
+	"""Social login of an e-mail with no user while sign-up is off.
+
+	Apps can send the person to their own sign-up page: each method in the `oauth_without_account`
+	hook gets the e-mail and the provider data and returns a URL (or None to let the next one decide).
+	"""
+	for method in frappe.get_hooks("oauth_without_account"):
+		if location := frappe.get_attr(method)(email=email, data=data):
+			frappe.local.response["type"] = "redirect"
+			frappe.local.response["location"] = location
+			return
+
+	frappe.respond_as_web_page(
+		_("No account found"),
+		_("There is no account with {0}. Ask an administrator to invite you.").format(
+			frappe.bold(frappe.utils.escape_html(email))
+		),
+		success=False,
+		http_status_code=403,
+	)
 
 
 def redirect_post_login(desk_user: bool, redirect_to: str | None = None, provider: str | None = None):
