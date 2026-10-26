@@ -14718,7 +14718,7 @@ msgstr "Unidades fracionárias"
 #. Label of a Desktop Icon
 #: frappe/desktop_icon/framework.json:9
 msgid "Framework"
-msgstr "Plataforma"
+msgstr "Administração"
 
 #. Option for the 'Social Login Provider' (Select) field in DocType 'Social
 #. Login Key'
