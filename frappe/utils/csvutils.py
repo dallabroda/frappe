@@ -186,7 +186,10 @@ def check_record(d):
 		val = d[key]
 		if docfield:
 			if docfield.reqd and (val == "" or val is None):
-				frappe.msgprint(_("{0} is required").format(docfield.label), raise_exception=1)
+				frappe.msgprint(
+					_("{0} is required").format(_(docfield.label, context=docfield.parent)),
+					raise_exception=1,
+				)
 
 			if docfield.fieldtype == "Select" and val and docfield.options:
 				if val not in docfield.options.split("\n"):

@@ -472,6 +472,18 @@ class TestNaming(IntegrationTestCase):
 
 		self.assertRaises(InvalidUUIDValue, frappe.new_doc(uuid_doctype, name="XYZ").insert)
 
+	def test_field_autoname_missing_uses_translated_label(self):
+		from unittest.mock import MagicMock, patch
+		from frappe.model.naming import set_name_from_naming_options
+
+		doc = frappe._dict(name=None, meta=MagicMock())
+		doc.meta.get_translated_label.return_value = "Nome da Organização"
+
+		with patch("frappe.model.naming._", side_effect=lambda s: "{0} é obrigatório" if s == "{0} is required" else s):
+			with self.assertRaisesRegex(frappe.ValidationError, "Nome da Organização é obrigatório"):
+				set_name_from_naming_options("field:organization_name", doc)
+		doc.meta.get_translated_label.assert_called_once_with("organization_name")
+
 
 def parse_naming_series_variable(doc, variable):
 	if variable == "PM":
