@@ -72,6 +72,7 @@ const { syncStatus, resetAll, isOnboardingStepsCompleted } = useOnboarding(props
 
 const show = defineModel<boolean>();
 const articles = defineModel<HelpArticle[]>("articles");
+const hasArticles = computed(() => Boolean(articles.value?.length));
 
 const headingTitle = computed(() => {
 	if (!isOnboardingStepsCompleted.value && !showHelpCenter.value) {
@@ -103,7 +104,8 @@ const footerItems = computed(() => {
 				syncStatus();
 				showHelpCenter.value = true;
 			},
-			condition: !isOnboardingStepsCompleted.value && !showHelpCenter.value,
+			// an empty help centre is only a dead end (credtech#206)
+			condition: hasArticles.value && !isOnboardingStepsCompleted.value && !showHelpCenter.value,
 		},
 		{
 			icon: StepsIcon,
@@ -125,7 +127,7 @@ function resetOnboardingSteps() {
 watch(
 	isOnboardingStepsCompleted,
 	(completed) => {
-		if (completed) showHelpCenter.value = true;
+		if (completed && hasArticles.value) showHelpCenter.value = true;
 	},
 	{ immediate: true }
 );
