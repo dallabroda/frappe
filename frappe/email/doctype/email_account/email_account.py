@@ -215,7 +215,9 @@ class EmailAccount(Document):
 
 		if self.notify_if_unreplied:
 			if not self.send_notification_to:
-				frappe.throw(_("{0} is mandatory").format(self.meta.get_label("send_notification_to")))
+				frappe.throw(
+					_("{0} is mandatory").format(self.meta.get_translated_label("send_notification_to"))
+				)
 			for e in self.get_unreplied_notification_emails():
 				validate_email_address(e, True)
 
@@ -393,7 +395,7 @@ class EmailAccount(Document):
 			args.password = self.get_password()
 
 		if not args.get("host"):
-			frappe.throw(_("{0} is required").format("Email Server"))
+			frappe.throw(_("{0} is required").format(_("Email Server")))
 
 		if self.flags.validate_imap_pop_connection:
 			args.timeout = 30

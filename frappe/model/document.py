@@ -1928,7 +1928,7 @@ class Document(_DocumentBase):
 		val2 = doc.cast(val2, df)
 
 		if not compare(val1, condition, val2):
-			label = doc.meta.get_label(fieldname)
+			label = doc.meta.get_translated_label(fieldname)
 			if doc.get("parentfield"):
 				msg = _("Incorrect value in row {0}:").format(doc.idx)
 			else:
@@ -2923,7 +2923,7 @@ class Document(_DocumentBase):
 		"""
 		df = self.meta.get_field(fieldname)
 		if df:
-			return _(df.label) if df.label else None
+			return _(df.label, context=self.doctype) if df.label else None
 
 	def update_modified(self):
 		"""Update modified timestamp"""
@@ -3100,7 +3100,7 @@ class Document(_DocumentBase):
 			if not fetch_from_df:
 				frappe.throw(
 					_('Please check the value of "Fetch From" set for field {0}').format(
-						frappe.bold(df.label)
+						frappe.bold(_(df.label, context=df.parent))
 					),
 					title=_("Wrong Fetch From value"),
 				)
