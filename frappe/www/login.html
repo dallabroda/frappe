@@ -6,44 +6,62 @@
 {% endif %}
 {% endblock %}
 {% macro email_login_body() -%}
+{#- Layout do Figma "Log in (SmartChat & HubTech)" (credtech#280): provedores, "OU", e-mail e senha -#}
+{% set brand_icons = {
+	"Google": "/assets/frappe/images/login/google.svg",
+	"Microsoft": "/assets/frappe/images/login/microsoft.svg",
+	"GitHub": "/assets/frappe/images/login/github.svg",
+} %}
+{% if social_login %}
+<div class="social-logins flex flex-col">
+	{% for provider in provider_logins %}
+	<a href="{{ provider.auth_url }}" class="login-social btn-login-option btn-{{ provider.name }}">
+		{% if brand_icons.get(provider.provider_name) %}
+		<img src="{{ brand_icons[provider.provider_name] }}" alt="" width="24" height="24">
+		{% elif provider.icon %}
+		{{ provider.icon }}
+		{% endif %}
+		{{ _("Login with {0}").format(provider.provider_name) }}</a>
+	{% endfor %}
+</div>
 {% if not disable_user_pass_login or (ldap_settings and ldap_settings.enabled) %}
-<div class="page-card-body flex flex-col gap-4">
+<div class="login-divider" role="separator"><span>{{ _("OR") }}</span></div>
+{% endif %}
+{% endif %}
+{% if not disable_user_pass_login or (ldap_settings and ldap_settings.enabled) %}
+<div class="page-card-body flex flex-col">
 	{{ alert_banner("error") }}
-	<div class="form-group flex flex-col items-start gap-1.5 mb-0">
-		<label class="text-base text-ink-gray-5 w-full mb-0" for="login_email">{{ login_label or _("Email")}}</label>
+	<div class="form-group flex flex-col items-start mb-0">
+		<label class="login-label w-full mb-0" for="login_email">{{ login_label }}</label>
 		<div class="email-field">
 			<input type="text" id="login_email" class="form-control"
-				placeholder="{% if login_name_placeholder %}{{ login_name_placeholder  }}{% else %}{{ _('jane@example.com') }}{% endif %}"
+				placeholder="{% if login_name_placeholder %}{{ login_name_placeholder  }}{% else %}{{ _('name@company.com') }}{% endif %}"
 				required autofocus autocomplete="username">
 		</div>
 		<p class="field-error text-base text-ink-red-8 mb-0"></p>
 	</div>
 
-	<div class="form-group flex flex-col items-start gap-2 mb-0">
-		<div class="flex flex-col items-start gap-1.5 w-full">
-			<label class="text-base text-ink-gray-5 w-full mb-0" for="login_password">{{ _("Password") }}</label>
-			<div class="password-field">
-				<input type="password" id="login_password" class="form-control" placeholder="••••••••"
-					autocomplete="current-password" required>
+	<div class="form-group flex flex-col items-start mb-0">
+		<label class="login-label w-full mb-0" for="login_password">{{ _("Password") }}</label>
+		<div class="password-field">
+			<input type="password" id="login_password" class="form-control" placeholder="••••••••"
+				autocomplete="current-password" required>
 
-				<svg toggle="#login_password" class="icon icon-sm toggle-password" xmlns="http://www.w3.org/2000/svg">
-						<use href="#icon-eye"></use>
-					</svg>
-			</div>
-			<p class="field-error text-base text-ink-red-8 mb-0"></p>
+			<svg toggle="#login_password" class="icon icon-sm toggle-password" xmlns="http://www.w3.org/2000/svg">
+					<use href="#icon-eye"></use>
+				</svg>
 		</div>
-		{% if not disable_user_pass_login %}
-		<p class="text-lg text-right w-full mb-0">
-			<a href="#forgot" class="text-base text-ink-gray-5">{{ _("Forgot password?") }}</a>
-		</p>
-		{% endif %}
+		<p class="field-error text-base text-ink-red-8 mb-0"></p>
 	</div>
+	{% if not disable_user_pass_login %}
+	<a href="#forgot" class="login-forgot">{{ _("Forgot my password") }}</a>
+	{% endif %}
 </div>
 {% endif %}
-<div class="page-card-actions flex flex-col gap-3">
+<div class="page-card-actions flex flex-col">
 	{% if not disable_user_pass_login %}
-	<button class="es-button w-full" data-variant="solid" type="submit">
-		{{ _("Continue") }}</button>
+	<button class="es-button login-submit w-full" data-variant="solid" type="submit">
+		{{ _("Login") }}</button>
 	{% endif %}
 	{% if ldap_settings and ldap_settings.enabled %}
 	<button class="es-button w-full btn-ldap-login" data-variant="solid">
@@ -51,24 +69,8 @@
 	{% endif %}
 	{% if login_with_email_link %}
 	<a href="#login-with-email-link"
-		class="es-button w-full btn-login-option btn-login-with-email-link">
+		class="login-social btn-login-option btn-login-with-email-link">
 		{{ _("Login with Email Link") }}</a>
-	{% endif %}
-	{% if social_login %}
-	<div class="social-logins text-center text-base">
-		<div class="social-login-buttons">
-			{% for provider in provider_logins %}
-			<div class="login-button-wrapper">
-				<a href="{{ provider.auth_url }}"
-					class="es-button w-full btn-login-option btn-{{ provider.name }}">
-					{% if provider.icon %}
-						{{ provider.icon }}
-					{% endif %}
-					{{ _("Login with {0}").format(provider.provider_name) }}</a>
-			</div>
-			{% endfor %}
-		</div>
-	</div>
 	{% endif %}
 </div>
 {% endmacro %}
@@ -78,14 +80,15 @@
 {% endblock %}
 
 {% macro logo_section(title=null, subtitle=null) %}
-<div class="page-card-head flex flex-col items-start gap-4 text-left">
-	<img class="app-logo" src="{{ logo }}">
-	<div class="page-card-head-text flex flex-col gap-1.5 w-full">
-		{% if title %}
-		<h4 class="text-3xl-bold text-ink-gray-9 w-full mt-0 mb-0">{{ _(title) }}</h4>
-		{% else %}
-		<h4 class="text-3xl-bold text-ink-gray-9 w-full mt-0 mb-0">{{ _('Sign In') }}</h4>
-		{% endif %}
+<div class="page-card-head login-head flex flex-col items-center text-center">
+	{#- Ícone da CredTech e do HubTech lado a lado, como no Figma (credtech#280) -#}
+	<div class="login-brand" aria-hidden="true">
+		<img class="login-brand-icon" src="/assets/frappe/images/login/credtech.svg" alt="" width="48" height="48">
+		<span class="login-brand-divider"></span>
+		<span class="login-product-icon"><img src="/assets/frappe/images/login/hubtech.svg" alt="" width="33.6" height="33.6"></span>
+	</div>
+	<div class="page-card-head-text flex flex-col w-full">
+		<h4 class="login-title w-full mt-0 mb-0">{{ _(title) if title else _("Welcome back!") }}</h4>
 		{% if subtitle %}
 		<p class="page-card-subtitle text-p-base text-ink-gray-6 mb-0">{{ _(subtitle) }}</p>
 		{% endif %}
@@ -106,19 +109,19 @@
 	</noscript>
 	<section class='for-login'>
 		<div class="login-content page-card flex flex-col gap-5">
-			{{ logo_section(_('Sign In'), _('Welcome! Please sign in to continue.')) }}
-			<form class="form-signin form-login flex flex-col gap-8" role="form" novalidate>
+			{{ logo_section(_('Welcome back!')) }}
+			<form class="form-signin form-login flex flex-col" role="form" novalidate>
 				{{ email_login_body() }}
 			</form>
 			{%- if not disable_signup and not disable_user_pass_login -%}
 			<div class="text-center sign-up-message text-p-sm text-ink-gray-6 mt-auto mb-0">
 				{{ _("Don't have an account?") }}
-				<a href="#signup" class="text-p-sm-semibold text-ink-gray-6">{{ _("Sign up") }}</a>
+				<a href="#signup" class="login-signup-link">{{ _("Sign up") }}</a>
 			</div>
 			{%- elif signup_url -%}
 			<div class="text-center sign-up-message text-p-sm text-ink-gray-6 mt-auto mb-0">
 				{{ _("Don't have an account?") }}
-				<a href="{{ signup_url }}" class="text-p-sm-semibold text-ink-gray-6">{{ _("Create my company") }}</a>
+				<a href="{{ signup_url }}" class="login-signup-link">{{ _("Sign up") }}</a>
 			</div>
 			{%- endif -%}
 		</div>
@@ -127,19 +130,19 @@
 	{%- if social_login -%}
 	<section class='for-email-login'>
 		<div class="login-content page-card flex flex-col gap-5">
-			{{ logo_section(_('Sign In'), _('Welcome! Please sign in to continue.')) }}
-			<form class="form-signin form-login flex flex-col gap-8" role="form" novalidate>
+			{{ logo_section(_('Welcome back!')) }}
+			<form class="form-signin form-login flex flex-col" role="form" novalidate>
 			{{ email_login_body() }}
 			</form>
 			{%- if not disable_signup and not disable_user_pass_login -%}
 			<div class="text-center sign-up-message text-p-sm text-ink-gray-6 mt-auto mb-0">
 				{{ _("Don't have an account?") }}
-				<a href="#signup" class="text-p-sm-semibold text-ink-gray-6">{{ _("Sign up") }}</a>
+				<a href="#signup" class="login-signup-link">{{ _("Sign up") }}</a>
 			</div>
 			{%- elif signup_url -%}
 			<div class="text-center sign-up-message text-p-sm text-ink-gray-6 mt-auto mb-0">
 				{{ _("Don't have an account?") }}
-				<a href="{{ signup_url }}" class="text-p-sm-semibold text-ink-gray-6">{{ _("Create my company") }}</a>
+				<a href="{{ signup_url }}" class="login-signup-link">{{ _("Sign up") }}</a>
 			</div>
 			{%- endif -%}
 		</div>
@@ -168,10 +171,10 @@
 					{{ alert_banner("success") }}
 					{{ alert_banner("error") }}
 					<div class="form-group flex flex-col items-start gap-1.5 mb-0">
-						<label class="text-base text-ink-gray-5 w-full mb-0" for="forgot_email">{{ _("Email") }}</label>
+						<label class="login-label w-full mb-0" for="forgot_email">{{ _("Work email") }}</label>
 						<div class="email-field">
 							<input type="email" id="forgot_email" class="form-control"
-								placeholder="{{ _('jane@example.com') }}" required autofocus autocomplete="username">
+								placeholder="{{ _('name@company.com') }}" required autofocus autocomplete="username">
 						</div>
 						<p class="field-error text-base text-ink-red-8 mb-0"></p>
 					</div>
@@ -195,10 +198,10 @@
 					{{ alert_banner("success", _("Please check your email.")) }}
 					{{ alert_banner("error") }}
 					<div class="form-group flex flex-col items-start gap-1.5 mb-0">
-						<label class="text-base text-ink-gray-5 w-full mb-0" for="login_with_email_link_email">{{ _("Email") }}</label>
+						<label class="login-label w-full mb-0" for="login_with_email_link_email">{{ _("Work email") }}</label>
 						<div class="email-field">
 							<input type="email" id="login_with_email_link_email" class="form-control"
-								placeholder="{{ _('jane@example.com') }}" required autofocus autocomplete="username">
+								placeholder="{{ _('name@company.com') }}" required autofocus autocomplete="username">
 						</div>
 						<p class="field-error text-base text-ink-red-8 mb-0"></p>
 					</div>
@@ -216,12 +219,12 @@
 			{%- if not disable_signup -%}
 			<div class="text-center sign-up-message text-p-sm text-ink-gray-6 mt-auto mb-0">
 				{{ _("Don't have an account?") }}
-				<a href="#signup" class="text-p-sm-semibold text-ink-gray-6">{{ _("Sign up") }}</a>
+				<a href="#signup" class="login-signup-link">{{ _("Sign up") }}</a>
 			</div>
 			{%- elif signup_url -%}
 			<div class="text-center sign-up-message text-p-sm text-ink-gray-6 mt-auto mb-0">
 				{{ _("Don't have an account?") }}
-				<a href="{{ signup_url }}" class="text-p-sm-semibold text-ink-gray-6">{{ _("Create my company") }}</a>
+				<a href="{{ signup_url }}" class="login-signup-link">{{ _("Sign up") }}</a>
 			</div>
 			{%- endif -%}
 		</div>
