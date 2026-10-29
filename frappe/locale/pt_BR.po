@@ -44243,3 +44243,19 @@ msgstr "Não há conta com {0}. Peça um convite ao administrador."
 #: frappe/www/login.html
 msgid "Create my company"
 msgstr "Criar minha empresa"
+
+#: frappe/www/login.html
+msgid "Welcome back!"
+msgstr "Bem-vindo de volta!"
+
+#: frappe/www/login.html
+msgid "Work email"
+msgstr "Email corporativo"
+
+#: frappe/www/login.html
+msgid "Forgot my password"
+msgstr "Esqueci minha senha"
+
+#: frappe/www/login.html
+msgid "name@company.com"
+msgstr "nome@empresa.com"

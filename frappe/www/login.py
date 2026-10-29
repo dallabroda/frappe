@@ -102,12 +102,16 @@ def get_context(context):
 			)
 			context["social_login"] = True
 
+	# Ordem do Figma (credtech#280): Google, Microsoft, GitHub; os outros depois, pelo nome
+	order = {"Google": 0, "Microsoft": 1, "GitHub": 2}
+	context.provider_logins.sort(key=lambda p: (order.get(p["provider_name"], len(order)), p["name"]))
+
 	if cint(frappe.db.get_value("LDAP Settings", "LDAP Settings", "enabled")):
 		from frappe.integrations.doctype.ldap_settings.ldap_settings import LDAPSettings
 
 		context["ldap_settings"] = LDAPSettings.get_ldap_client_settings()
 
-	login_label = [_("Email")]
+	login_label = [_("Work email")]  # "Email corporativo", como no Figma (credtech#280)
 
 	if frappe.utils.cint(frappe.get_system_settings("allow_login_using_mobile_number")):
 		login_label.append(_("Mobile"))

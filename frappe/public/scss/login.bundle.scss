@@ -179,3 +179,238 @@ body {
 		width: auto;
 	}
 }
+
+// Layout do Figma "Log in (SmartChat & HubTech)" (credtech#280), com as medidas do cadastro do site:
+// coluna de 360 px (504 px no tablet, a tela toda menos 24 px no celular), campos e botões de 44 px, Inter.
+$login-line: #dedbd5;
+$login-soft: #f6f4f2;
+$login-muted: rgba(0, 0, 0, 0.6);
+$login-shadow-xs: 0 1px 2px 0 rgba(16, 24, 40, 0.05);
+
+body {
+	background-color: #fff;
+
+	.page-content-wrapper {
+		padding-top: 50px;
+
+		@media (max-width: 1023px) {
+			padding-top: 40px;
+		}
+
+		@media (max-width: 639px) {
+			padding-top: 30px;
+		}
+	}
+}
+
+.for-login,
+.for-forgot,
+.for-login-with-email-link,
+.for-signup,
+.for-email-login,
+.for-reset-password {
+	.page-card.login-content {
+		gap: 16px;
+		max-width: 360px;
+		padding: 0;
+		background-color: #fff;
+		border: none;
+		border-radius: 0;
+		color: #000;
+
+		@media (max-width: 1023px) {
+			max-width: 504px;
+		}
+
+		@media (max-width: 639px) {
+			max-width: 100%;
+			min-height: auto;
+			padding: 0 24px 32px;
+		}
+
+		.form-login,
+		.page-card-body,
+		.page-card-actions,
+		.social-logins {
+			gap: 16px;
+		}
+
+		.form-group {
+			gap: 6px;
+			width: 100%;
+		}
+
+		.page-card-body {
+			.login-label {
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 20px;
+				color: $login-muted;
+			}
+
+			input[type="text"],
+			input[type="email"],
+			input[type="password"] {
+				height: 44px;
+				padding: 10px 14px;
+				border: 1px solid $login-line;
+				border-radius: 8px;
+				background-color: #fff;
+				font-size: 16px;
+				line-height: 24px;
+				color: #000;
+
+				&::placeholder {
+					color: rgba(0, 0, 0, 0.3);
+				}
+
+				&:focus {
+					border-color: #000;
+					box-shadow: none;
+					outline: 2px solid #000;
+					outline-offset: -1px;
+				}
+			}
+
+			.password-field input {
+				padding-right: 40px;
+			}
+
+			.toggle-password {
+				right: 14px;
+			}
+		}
+
+		.login-social {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 12px;
+			width: 100%;
+			height: 44px;
+			padding: 10px 16px;
+			border: 1px solid $login-line;
+			border-radius: 8px;
+			background-color: $login-soft;
+			font-size: 16px;
+			font-weight: 500;
+			line-height: 24px;
+			color: #000;
+			text-decoration: none;
+
+			&:hover {
+				background-color: #ecebe7;
+			}
+
+			img,
+			svg {
+				width: 24px;
+				height: 24px;
+				flex-shrink: 0;
+			}
+		}
+
+		.login-divider {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			font-size: 14px;
+			font-weight: 500;
+			line-height: 20px;
+			color: $login-muted;
+
+			&::before,
+			&::after {
+				content: "";
+				flex: 1;
+				border-top: 1px solid $login-line;
+			}
+		}
+
+		.login-forgot,
+		.login-signup-link {
+			font-size: 14px;
+			font-weight: 600;
+			line-height: 20px;
+			color: #000;
+			text-decoration: underline;
+			text-underline-offset: 3px;
+		}
+
+		.login-forgot {
+			align-self: flex-start;
+		}
+
+		.es-button[data-variant="solid"] {
+			height: 44px;
+			border-radius: 8px;
+			background-color: #000;
+			box-shadow: $login-shadow-xs;
+			font-size: 16px;
+			font-weight: 600;
+			line-height: 24px;
+			color: #fff;
+
+			&:hover {
+				background-color: #1f1f1f;
+			}
+		}
+
+		.sign-up-message {
+			margin-top: 0 !important;
+			font-size: 14px;
+			line-height: 20px;
+			color: $login-muted;
+		}
+	}
+}
+
+.page-card-head.login-head {
+	gap: 16px;
+
+	.login-brand {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+	}
+
+	.login-brand-icon {
+		display: block;
+		width: 48px;
+		height: 48px;
+	}
+
+	.login-brand-divider {
+		width: 1px;
+		height: 40px;
+		background-color: #e7e6df;
+	}
+
+	.login-product-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 48px;
+		height: 48px;
+		border-radius: 11px;
+		background: linear-gradient(180deg, #eebff4 7.198%, #c320d9 26.018%);
+
+		img {
+			display: block;
+			width: 33.6px;
+			height: 33.6px;
+		}
+	}
+
+	.page-card-head-text {
+		gap: 6px;
+	}
+
+	.login-title {
+		font-size: 26px;
+		font-weight: 500;
+		line-height: normal;
+		letter-spacing: -2px;
+		color: #000;
+	}
+}
