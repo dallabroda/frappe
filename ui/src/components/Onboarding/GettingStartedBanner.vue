@@ -38,7 +38,7 @@
 		</div>
 		<Button
 			v-if="stepsCompleted != totalSteps"
-			:label="stepsCompleted == 0 ? 'Start now' : 'Continue'"
+			:label="stepsCompleted == 0 ? __('Start now') : __('Continue')"
 			theme="blue"
 			@click="openOnboarding"
 		>
