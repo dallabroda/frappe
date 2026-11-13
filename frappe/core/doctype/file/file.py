@@ -355,21 +355,44 @@ class File(Document):
 		if updated_file_url == old_file_url:
 			return
 
+		moved_externally = False
 		if not source.exists():
-			frappe.throw(
-				_("Cannot find file {} on disk").format(source),
-				exc=FileNotFoundError,
-			)
-		if target.exists():
-			frappe.throw(
-				_("A file with same name {} already exists").format(target),
-				exc=FileExistsError,
-			)
+			read_method = get_hook_method("read_file_content")
+			write_method = get_hook_method("write_file")
+			if read_method and write_method:
+				old_doc_view = frappe._dict(
+					name=self.name,
+					file_name=file_name,
+					file_url=old_file_url,
+					is_private=int(not cint(self.is_private)),
+					content_hash=self.content_hash,
+				)
+				raw = read_method(old_doc_view)
+				if raw is not None:
+					self._content = raw if isinstance(raw, bytes) else raw.encode()
+					self.file_url = updated_file_url
+					write_method(self)
+					del_method = get_hook_method("delete_file_data_content")
+					if del_method:
+						del_method(old_doc_view, only_thumbnail=False)
+					moved_externally = True
 
-		# Uses os.rename which is an atomic operation
-		shutil.move(source, target)
-		self.flags.original_path = {"old": source, "new": target}
-		frappe.db.after_rollback.add(self.on_rollback)
+		if not moved_externally:
+			if not source.exists():
+				frappe.throw(
+					_("Cannot find file {} on disk").format(source),
+					exc=FileNotFoundError,
+				)
+			if target.exists():
+				frappe.throw(
+					_("A file with same name {} already exists").format(target),
+					exc=FileExistsError,
+				)
+
+			# Uses os.rename which is an atomic operation
+			shutil.move(source, target)
+			self.flags.original_path = {"old": source, "new": target}
+			frappe.db.after_rollback.add(self.on_rollback)
 
 		self.file_url = updated_file_url
 		update_existing_file_docs(self)
@@ -469,7 +492,7 @@ class File(Document):
 		if full_path.startswith(URL_PREFIXES):
 			return True
 
-		if not os.path.exists(full_path):
+		if not self.exists_on_disk():
 			frappe.throw(_("File {0} does not exist").format(self.file_url), IOError)
 
 	def validate_file_extension(self):
@@ -538,6 +561,14 @@ class File(Document):
 	def generate_content_hash(self):
 		if self.content_hash or not self.file_url or self.is_remote_file:
 			return
+		read_method = get_hook_method("read_file_content")
+		if read_method:
+			content = read_method(self)
+			if content is not None:
+				if isinstance(content, str):
+					content = content.encode()
+				self.content_hash = get_content_hash(content)
+				return
 		file_name = self.file_url.split("/")[-1]
 		try:
 			file_path = get_files_path(file_name, is_private=self.is_private)
