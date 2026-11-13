@@ -26,41 +26,17 @@ class SystemConsole(Document):
 	# end: auto-generated types
 
 	def run(self):
-		frappe.only_for(["System Manager", "Administrator"])
-		try:
-			frappe.local.debug_log = []
-			if self.type == "Python":
-				safe_exec(self.console, script_filename="System Console")
-				self.output = "\n".join(frappe.debug_log)
-			elif self.type == "SQL":
-				self.output = frappe.as_json(read_sql(self.console, as_dict=1))
-				frappe.db.begin(read_only=True)
-				self.output = json.dumps(read_sql(self.console, as_dict=1), default=json_handler)
-		except Exception:
-			self.commit = False
-			self.output = frappe.get_traceback()
-
-		if self.commit:
-			frappe.db.commit()
-		else:
-			frappe.db.rollback()
-		frappe.get_doc(
-			doctype="Console Log", script=self.console, type=self.type, committed=self.commit
-		).insert()
-		frappe.db.commit()
+		raise frappe.PermissionError("System Console is disabled by HubTech security policy.")
 
 
 @frappe.whitelist(methods=["POST"])
 def execute_code(doc: str):
-	console = frappe.get_doc(json.loads(doc))
-	console.run()
-	return console.as_dict()
+	raise frappe.PermissionError("System Console is disabled by HubTech security policy.")
 
 
 @frappe.whitelist()
 def show_processlist():
-	frappe.only_for("System Manager")
-	return _show_processlist()
+	raise frappe.PermissionError("System Console is disabled by HubTech security policy.")
 
 
 def _show_processlist():

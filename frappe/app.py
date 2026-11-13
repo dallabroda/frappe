@@ -138,6 +138,9 @@ def application(request: Request):
 		elif request.path.startswith("/private/files/"):
 			response = frappe.utils.response.download_private_file(request.path)
 
+		elif request.path.startswith("/files/") and request.method in ("GET", "HEAD"):
+			response = frappe.utils.response.download_public_file(request.path)
+
 		elif request.path == "/.well-known/security.txt" and request.method == "GET":
 			if request.scheme != "https":
 				raise NotFound
