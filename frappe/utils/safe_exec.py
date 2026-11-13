@@ -84,12 +84,13 @@ class FrappePrintCollector(PrintCollector):
 
 
 def is_safe_exec_enabled() -> bool:
-	# server scripts can only be enabled via common_site_config.json
-	return bool(frappe.get_common_site_config(cached=True).get(SAFE_EXEC_CONFIG_KEY))
+	# HubTech Sovereign Security Policy: dynamic Server Scripts are permanently disabled.
+	return False
 
 
 def is_render_exec_enabled() -> bool:
-	return not bool(frappe.get_common_site_config(cached=True).get(RENDER_EXEC_CONFIG_KEY, 1))
+	# HubTech Sovereign Security Policy: dynamic template code execution is permanently disabled.
+	return False
 
 
 def safe_exec(
@@ -101,10 +102,11 @@ def safe_exec(
 	script_filename: str | None = None,
 ):
 	if not is_safe_exec_enabled():
-		msg = _("Server Scripts are disabled. Please enable server scripts from bench configuration.")
-		docs_cta = _("Read the documentation to know more")
-		msg += f"<br><a href='https://frappeframework.com/docs/user/en/desk/scripting/server-script' target='_blank' rel='noopener noreferrer'>{docs_cta}</a>"
-		frappe.throw(msg, ServerScriptNotEnabled, title="Server Scripts Disabled")
+		frappe.throw(
+			_("Dynamic Server Scripts are disabled by HubTech security policy."),
+			ServerScriptNotEnabled,
+			title="Server Scripts Disabled",
+		)
 
 	# build globals
 	exec_globals = get_safe_globals()

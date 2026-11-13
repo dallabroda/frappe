@@ -273,22 +273,8 @@ def redirect():
 
 
 def download_backup(path):
-	try:
-		frappe.only_for(("System Manager", "Administrator"))
-		make_access_log(report_name="Backup")
-	except frappe.PermissionError:
-		raise Forbidden(
-			_("You need to be logged in and have System Manager Role to be able to access backups.")
-		)
-
-	filename = path.split("/backups/", 1)[1]
-	backup_path = frappe.get_site_path("private", "backups")
-	requested_path = frappe.get_site_path("private", "backups", filename)
-	is_safe = check_path_safety(base_path=backup_path, requested_path=requested_path)
-	if not is_safe:
-		frappe.throw(_("Invalid backup path"), frappe.PermissionError)
-
-	return send_private_file(path)
+	# HubTech Sovereign Security Policy: raw database backups are never downloadable via HTTP.
+	raise Forbidden(_("Web backup downloads are disabled by security policy."))
 
 
 def download_private_file(path: str) -> Response:
@@ -303,7 +289,36 @@ def download_private_file(path: str) -> Response:
 		raise Forbidden(_("You don't have permission to access this file"))
 
 	make_access_log(doctype="File", document=file.name, file_type=os.path.splitext(path)[-1][1:])
+	serve_method = frappe.get_hook_method("serve_private_file")
+	if serve_method:
+		resp = serve_method(file, path=path)
+		if resp is not None:
+			return resp
 	return send_private_file(path.split("/private", 1)[1], filename=file.file_name)
+
+
+def download_public_file(path: str) -> Response:
+	"""Serves public /files/* from external object storage hook when not present on local disk."""
+	serve_method = frappe.get_hook_method("serve_public_file")
+	if serve_method:
+		resp = serve_method(path=path)
+		if resp is not None:
+			return resp
+	rel = path.lstrip("/")
+	if not rel.startswith("files/") or ".." in rel.split("/"):
+		raise NotFound
+	filepath = frappe.utils.get_site_path("public", rel)
+	if not os.path.isfile(filepath):
+		raise NotFound
+	filename = os.path.basename(filepath)
+	as_attachment = os.path.splitext(filename)[1].lower() in FORCE_DOWNLOAD_EXTENSIONS
+	return werkzeug.utils.send_file(
+		filepath,
+		environ=frappe.local.request.environ,
+		conditional=True,
+		as_attachment=as_attachment,
+		download_name=filename,
+	)
 
 
 FORCE_DOWNLOAD_EXTENSIONS = (

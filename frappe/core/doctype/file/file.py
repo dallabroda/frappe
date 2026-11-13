@@ -710,6 +710,11 @@ class File(Document):
 		return files
 
 	def exists_on_disk(self):
+		exists_method = get_hook_method("file_exists")
+		if exists_method:
+			res = exists_method(self)
+			if res is not None:
+				return bool(res)
 		return os.path.exists(self.get_full_path())
 
 	def get_content(self, encodings=None) -> bytes | str:
@@ -728,23 +733,32 @@ class File(Document):
 
 		if self.file_url:
 			self.validate_file_url()
-		file_path = self.get_full_path()
 
 		if encodings is None:
 			encodings = FILE_ENCODING_OPTIONS
-		with open(file_path, mode="rb") as f:
-			self._content = f.read()
-			if not self._content.startswith(OLE_FILE_SIGNATURE):
-				# looping will not result in slowdown, as the content is usually utf-8 or utf-8-sig
-				# encoded so the first iteration will be enough most of the time
-				for encoding in encodings:
-					try:
-						# read file with proper encoding
-						self._content = self._content.decode(encoding)
-						break
-					except UnicodeDecodeError:
-						# for .png, .jpg, etc
-						continue
+
+		raw_bytes = None
+		read_method = get_hook_method("read_file_content")
+		if read_method:
+			raw_bytes = read_method(self)
+
+		if raw_bytes is None:
+			file_path = self.get_full_path()
+			with open(file_path, mode="rb") as f:
+				raw_bytes = f.read()
+
+		self._content = raw_bytes
+		if isinstance(self._content, bytes) and not self._content.startswith(OLE_FILE_SIGNATURE):
+			# looping will not result in slowdown, as the content is usually utf-8 or utf-8-sig
+			# encoded so the first iteration will be enough most of the time
+			for encoding in encodings:
+				try:
+					# read file with proper encoding
+					self._content = self._content.decode(encoding)
+					break
+				except UnicodeDecodeError:
+					# for .png, .jpg, etc
+					continue
 
 		return self._content
 

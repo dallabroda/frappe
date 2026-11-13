@@ -1,0 +1,73 @@
+name: HubTech Core Sovereign Security Audit
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sovereign-hardening-and-sast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify HubTech Sovereign Core Invariants (System Console, Server Scripts & Web Backups Disabled)
+        run: |
+          python3 - <<'PY'
+          import ast, pathlib, sys
+
+          root = pathlib.Path("frappe")
+
+          # 1. System Console execute_code and show_processlist must unconditionally raise PermissionError
+          sc = (root / "desk/doctype/system_console/system_console.py").read_text(encoding="utf-8")
+          assert "safe_exec(self.console" not in sc, "FATAL: System Console Python RCE is not disabled!"
+          assert "System Console is disabled by HubTech security policy" in sc
+
+          # 2. Server Scripts & render safe_exec must be permanently disabled
+          se = (root / "utils/safe_exec.py").read_text(encoding="utf-8")
+          tree = ast.parse(se)
+          funcs = {n.name: n for n in tree.body if isinstance(n, ast.FunctionDef)}
+          for fn_name in ("is_safe_exec_enabled", "is_render_exec_enabled"):
+              fn = funcs[fn_name]
+              returns = [n for n in ast.walk(fn) if isinstance(n, ast.Return)]
+              assert len(returns) == 1 and isinstance(returns[0].value, ast.Constant) and returns[0].value.value is False, \
+                  f"FATAL: {fn_name} must unconditionally return False!"
+
+          # 3. Web backup SQL dump downloads must be forbidden
+          resp = (root / "utils/response.py").read_text(encoding="utf-8")
+          assert "Web backup downloads are disabled by security policy" in resp, \
+              "FATAL: Web /backups download endpoint is not blocked!"
+
+          # 4. Syntax check all modified core files
+          for rel in (
+              "app.py",
+              "utils/response.py",
+              "utils/safe_exec.py",
+              "core/doctype/file/file.py",
+              "desk/doctype/system_console/system_console.py",
+          ):
+              ast.parse((root / rel).read_text(encoding="utf-8"), filename=rel)
+
+          print("All HubTech sovereign core hardening invariants verified.")
+          PY
+
+      - name: Run Bandit SAST (High Severity / High Confidence on HTTP, Auth & File Boundary)
+        run: |
+          pip install -q bandit
+          bandit -lll -iii \
+            frappe/app.py \
+            frappe/auth.py \
+            frappe/handler.py \
+            frappe/api/__init__.py \
+            frappe/utils/response.py \
+            frappe/core/doctype/file/file.py \
+            frappe/desk/doctype/system_console/system_console.py
